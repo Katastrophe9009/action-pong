@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dg0o2h2qtwjnt"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1855705793]
+follow_viewport_enabled = true
+
+[node name="PlayerScore" type="Label" parent="." unique_id=369973380]
+anchors_preset = -1
+anchor_left = 0.40300003
+anchor_top = 0.053000003
+anchor_right = 0.40300003
+anchor_bottom = 0.053000003
+offset_left = -16.256042
+offset_top = -34.344
+offset_right = 23.743958
+offset_bottom = 35.656
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 35)
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUScore" type="Label" parent="." unique_id=733192867]
+anchors_preset = -1
+anchor_left = 0.59400004
+anchor_top = 0.053000003
+anchor_right = 0.59400004
+anchor_bottom = 0.053000003
+offset_left = -20.288025
+offset_top = -34.344
+offset_right = 19.711975
+offset_bottom = 35.656
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 35)
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BumpCooldown" type="Label" parent="." unique_id=1751632379]
+offset_left = 16.0
+offset_right = 45.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "0"

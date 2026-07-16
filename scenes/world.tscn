@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://5qj2qnpryvjq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5uuo"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
+size = Vector2(448, 648)
+
+[sub_resource type="Environment" id="Environment_e5uuo"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 5.0
+glow_strength = 0.73
+glow_bloom = 0.12
+
+[node name="World" type="Node2D" unique_id=70790351]
+
+[node name="Borders" type="StaticBody2D" parent="." unique_id=1885868881]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Borders" unique_id=1376538156]
+position = Vector2(576, -10)
+shape = SubResource("RectangleShape2D_e5uuo")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders" unique_id=2131267102]
+position = Vector2(576, 658)
+shape = SubResource("RectangleShape2D_e5uuo")
+
+[node name="Score_Left" type="Area2D" parent="." unique_id=694079976]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_Left" unique_id=566404763]
+position = Vector2(-224, 324)
+shape = SubResource("RectangleShape2D_nnsk1")
+
+[node name="Score_Right" type="Area2D" parent="." unique_id=904026290]
+position = Vector2(1172, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_Right" unique_id=1508917234]
+position = Vector2(204, 324)
+shape = SubResource("RectangleShape2D_nnsk1")
+
+[node name="Net" type="ColorRect" parent="." unique_id=779672126]
+offset_left = 568.0
+offset_top = -64.0
+offset_right = 584.0
+offset_bottom = 704.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1402171560]
+environment = SubResource("Environment_e5uuo")

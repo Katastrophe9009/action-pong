@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://blf6sr6w5p21h"]
+
+[ext_resource type="Script" uid="uid://ygrckp0n8ld7" path="res://scenes/ball.gd" id="1_cxlvu"]
+[ext_resource type="Texture2D" uid="uid://4a6kikgc6huo" path="res://assets/icon.svg" id="2_f7cbr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(10, 10)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cxlvu"]
+lifetime_randomness = 0.51
+particle_flag_align_y = true
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+angular_velocity_min = 209.02998
+angular_velocity_max = 209.02998
+color = Color(0.7383582, 0.82957876, 1, 1)
+turbulence_enabled = true
+
+[sub_resource type="Curve" id="Curve_cxlvu"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Ball" type="CharacterBody2D" unique_id=314270159]
+collision_mask = 7
+script = ExtResource("1_cxlvu")
+trail_color = Color(0, 0.23921569, 1, 1)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=956066539]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640108385]
+shape = SubResource("RectangleShape2D_ig7tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1964761641]
+position = Vector2(1.9073486e-06, -1.9073486e-06)
+scale = Vector2(0.07812497, 0.07812497)
+texture = ExtResource("2_f7cbr")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1939468700]
+visible = false
+trail_enabled = true
+trail_lifetime = 2.38
+trail_sections = 2
+process_material = SubResource("ParticleProcessMaterial_cxlvu")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1794125350]
+top_level = true
+width = 5.0
+width_curve = SubResource("Curve_cxlvu")
+default_color = Color(0, 0.14901961, 1, 1)

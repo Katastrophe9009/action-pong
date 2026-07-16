@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://buutbtwu2071p"]
+
+[ext_resource type="Script" uid="uid://h8lh5i7670xp" path="res://scenes/speed_up.gd" id="1_6ymch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
+size = Vector2(40, 40)
+
+[node name="SpeedUp" type="Area2D" unique_id=1880483943]
+collision_layer = 4
+script = ExtResource("1_6ymch")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1155000666]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.34632522, 0.72995615, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696247895]
+shape = SubResource("RectangleShape2D_o6xl0")

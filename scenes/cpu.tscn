@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bqjjtvdnbuacs"]
+
+[ext_resource type="Script" uid="uid://opk0ku2lqod7" path="res://scenes/cpu.gd" id="1_5i68j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(20, 100)
+
+[node name="CPU" type="StaticBody2D" unique_id=1329988711]
+script = ExtResource("1_5i68j")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1107359345]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_right = 20.0
+offset_bottom = 50.0
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=262754704]
+position = Vector2(10, 0)
+shape = SubResource("RectangleShape2D_7dm0k")

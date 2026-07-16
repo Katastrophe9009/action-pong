@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://85sg32yf8gnn"]
+
+[ext_resource type="Script" uid="uid://cobhuwio4luay" path="res://scenes/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://5qj2qnpryvjq" path="res://scenes/world.tscn" id="2_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cuxlrsleyyvi2" path="res://scenes/player.tscn" id="3_tipki"]
+[ext_resource type="PackedScene" uid="uid://bqjjtvdnbuacs" path="res://scenes/cpu.tscn" id="4_85g3d"]
+[ext_resource type="PackedScene" uid="uid://blf6sr6w5p21h" path="res://scenes/ball.tscn" id="5_choun"]
+[ext_resource type="PackedScene" uid="uid://buutbtwu2071p" path="res://scenes/speed_up.tscn" id="6_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://dg0o2h2qtwjnt" path="res://scenes/hud.tscn" id="7_eb6dy"]
+
+[node name="Node2D" type="Sprite2D" unique_id=769279785]
+script = ExtResource("1_sugp2")
+powerups = Array[PackedScene]([ExtResource("6_ya4ey")])
+
+[node name="World" parent="." unique_id=70790351 instance=ExtResource("2_o6xl0")]
+
+[node name="Ball" parent="." unique_id=314270159 instance=ExtResource("5_choun")]
+position = Vector2(576, 320)
+
+[node name="Player" parent="." unique_id=1244232865 instance=ExtResource("3_tipki")]
+z_index = 1
+position = Vector2(64, 320)
+
+[node name="CPU" parent="." unique_id=1329988711 instance=ExtResource("4_85g3d")]
+z_index = 1
+position = Vector2(1068, 320)
+
+[node name="BallTimer" type="Timer" parent="." unique_id=597184308]
+one_shot = true
+autostart = true
+
+[node name="PowerUpTimer" type="Timer" parent="." unique_id=1815851831]
+wait_time = 15.0
+autostart = true
+
+[node name="PowerUpDurationTimer" type="Timer" parent="." unique_id=1301796267]
+wait_time = 10.0
+
+[node name="BumpCooldownTimer" type="Timer" parent="." unique_id=1879984374]
+wait_time = 5.0
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1306437074]
+position = Vector2(576, 324)
+
+[node name="ScreenShakeTimer" type="Timer" parent="." unique_id=904953484]
+wait_time = 0.5
+one_shot = true
+
+[node name="Hud" parent="." unique_id=1855705793 instance=ExtResource("7_eb6dy")]
+
+[connection signal="body_entered" from="World/Score_Left" to="." method="_on_score_left_body_entered"]
+[connection signal="body_entered" from="World/Score_Right" to="." method="_on_score_right_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
+[connection signal="timeout" from="ScreenShakeTimer" to="." method="_on_screen_shake_timer_timeout"]
+
+[editable path="World"]
