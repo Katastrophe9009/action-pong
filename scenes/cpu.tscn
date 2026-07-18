@@ -6,6 +6,7 @@
 size = Vector2(20, 100)
 
 [node name="CPU" type="StaticBody2D" unique_id=1329988711]
+z_index = 1
 script = ExtResource("1_5i68j")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1107359345]

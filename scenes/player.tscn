@@ -9,6 +9,7 @@ size = Vector2(20, 100)
 script = ExtResource("1_3vyb7")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1728621579]
+z_index = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5

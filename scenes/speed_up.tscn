@@ -5,7 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6xl0"]
 size = Vector2(40, 40)
 
-[node name="SpeedUp" type="Area2D" unique_id=1880483943]
+[node name="SpeedUp" type="Area2D" unique_id=1880483943 groups=["powerups"]]
+z_index = 1
 collision_layer = 4
 script = ExtResource("1_6ymch")
 
@@ -19,3 +20,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696247895]
 shape = SubResource("RectangleShape2D_o6xl0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

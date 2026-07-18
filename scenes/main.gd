@@ -1,6 +1,9 @@
 extends Sprite2D
 
 @export var powerups : Array[PackedScene]
+@export var ball_scene: PackedScene
+
+
 
 var score := [0, 0]# 0:Player, 1:CPU
 var win_size : Vector2
@@ -16,15 +19,36 @@ func _on_screen_shake_timer_timeout() -> void:
 	$Camera2D.offset = Vector2(0,0)
 
 func _on_ball_timer_timeout() -> void:
-	$Ball.new_ball()
+	
+	spawn_ball()
 
+func clear_powerups():
+	var active_powerups = get_tree().get_nodes_in_group("powerups")
+	for powerup in active_powerups:
+		powerup.queue_free()
 
 func reset_powerups():
 	print("Resetting Powerups...")
 	$PowerUpDurationTimer.stop()
 	$PowerUpTimer.start()
-#	for  in SceneTree:
-#		queue_free()
+	clear_powerups()
+
+func spawn_ball():
+	
+	var spawning_ball = ball_scene.instantiate()
+	spawning_ball.add_to_group("ball")
+	spawning_ball.position.x = win_size.x /2
+	spawning_ball.position.y = randi_range(200, win_size.y -200)
+	add_child(spawning_ball)
+
+	
+	pass
+
+func clear_balls():
+#	for ball is_in_group("ball"):
+#		ball.queue_free()
+
+	pass
 
 func spawn_powerup():
 	#Pick and define a random powerup to spawn.
@@ -36,13 +60,17 @@ func spawn_powerup():
 	spawning_powerup.position.y = randi_range(200, win_size.y -200)
 	add_child(spawning_powerup)
 	print("Spawned:", spawning_powerup)
+	
+
 
 func _on_power_up_timer_timeout() -> void:
-	pass
-	#Broken, needs rework
-#	spawn_powerup()
+	
+	clear_powerups()
+	spawn_powerup()
 
 func reinitialize():
+	print("Starting New Round...")
+
 	$BallTimer.start()
 	$PowerUpDurationTimer.stop()
 	$PowerUpTimer.start()

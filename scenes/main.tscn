@@ -11,18 +11,19 @@
 [node name="Node2D" type="Sprite2D" unique_id=769279785]
 script = ExtResource("1_sugp2")
 powerups = Array[PackedScene]([ExtResource("6_ya4ey")])
+ball_scene = ExtResource("5_choun")
 
 [node name="World" parent="." unique_id=70790351 instance=ExtResource("2_o6xl0")]
 
-[node name="Ball" parent="." unique_id=314270159 instance=ExtResource("5_choun")]
-position = Vector2(576, 320)
+[node name="Score_Left" parent="World" index="1" unique_id=694079976 groups=["left_goal"]]
 
-[node name="Player" parent="." unique_id=1244232865 instance=ExtResource("3_tipki")]
+[node name="Score_Right" parent="World" index="2" unique_id=904026290 groups=["right_goal"]]
+
+[node name="Player" parent="." unique_id=1244232865 groups=["paddle"] instance=ExtResource("3_tipki")]
 z_index = 1
 position = Vector2(64, 320)
 
-[node name="CPU" parent="." unique_id=1329988711 instance=ExtResource("4_85g3d")]
-z_index = 1
+[node name="CPU" parent="." unique_id=1329988711 groups=["paddle"] instance=ExtResource("4_85g3d")]
 position = Vector2(1068, 320)
 
 [node name="BallTimer" type="Timer" parent="." unique_id=597184308]
@@ -30,7 +31,7 @@ one_shot = true
 autostart = true
 
 [node name="PowerUpTimer" type="Timer" parent="." unique_id=1815851831]
-wait_time = 15.0
+wait_time = 5.0
 autostart = true
 
 [node name="PowerUpDurationTimer" type="Timer" parent="." unique_id=1301796267]

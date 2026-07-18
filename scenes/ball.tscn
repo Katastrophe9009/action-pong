@@ -20,10 +20,21 @@ turbulence_enabled = true
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Ball" type="CharacterBody2D" unique_id=314270159]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxlvu"]
+size = Vector2(10, 10)
+
+[node name="Ball" type="CharacterBody2D" unique_id=314270159 groups=["ball"]]
 collision_mask = 7
 script = ExtResource("1_cxlvu")
 trail_color = Color(0, 0.23921569, 1, 1)
+trail_length = null
+trail_width = null
+trail_curve_min_width = null
+trail_curve_max_width = null
+start_speed = null
+accel = null
+speed = null
+dir = null
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=956066539]
 visible = false
@@ -59,3 +70,10 @@ top_level = true
 width = 5.0
 width_curve = SubResource("Curve_cxlvu")
 default_color = Color(0, 0.14901961, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=350404197]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=642266829]
+shape = SubResource("RectangleShape2D_cxlvu")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
