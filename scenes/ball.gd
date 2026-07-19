@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal point_scored(side)
+
 @export var trail_color: Color
 @export var trail_length: int = 20
 @export var trail_width: int = 5
@@ -88,6 +90,12 @@ func new_direction(collider):
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("left_goal") or area.is_in_group("right_goal"):
+	if area.is_in_group("left_goal"):
 		print("Goal Passed: ", area)
+		point_scored.emit("left")
 		
+		pass
+	elif area.is_in_group("right_goal"):
+		print("Goal Passed: ", area)
+		point_scored.emit("right")
+	queue_free()

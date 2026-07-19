@@ -19,8 +19,39 @@ func _on_screen_shake_timer_timeout() -> void:
 	$Camera2D.offset = Vector2(0,0)
 
 func _on_ball_timer_timeout() -> void:
-	
 	spawn_ball()
+	
+func _on_ball_point_scored(side):
+	if side == "left":
+		var score_tween = create_tween()
+	
+		print("Opponent Scores...")
+		score[1] += 1
+	
+		#Hud "Pop"
+		$Hud/CPUScore.text = str(score[1])
+		score_tween.tween_property($Hud/CPUScore, "scale", Vector2(1.5, 1.5), 0.1).set_trans(Tween.TRANS_ELASTIC)
+		score_tween.tween_property($Hud/CPUScore, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_ELASTIC)
+	
+		print("Opponent Points: ", score[1])
+	
+
+	elif side == "right":
+		var score_tween = create_tween()
+	
+		print("Player Scores...")
+		score[0] += 1
+	
+		#Hud "Pop"
+		$Hud/PlayerScore.text = str(score[0])
+		score_tween.tween_property($Hud/PlayerScore, "scale", Vector2(1.5, 1.5), 0.1).set_trans(Tween.TRANS_ELASTIC)
+		score_tween.tween_property($Hud/PlayerScore, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_ELASTIC)
+	
+		print("Player Points: ", score[0])
+	
+	reinitialize()
+	
+
 
 func clear_powerups():
 	var active_powerups = get_tree().get_nodes_in_group("powerups")
@@ -34,15 +65,13 @@ func reset_powerups():
 	clear_powerups()
 
 func spawn_ball():
-	
 	var spawning_ball = ball_scene.instantiate()
+	
 	spawning_ball.add_to_group("ball")
+	spawning_ball.point_scored.connect(_on_ball_point_scored)
 	spawning_ball.position.x = win_size.x /2
 	spawning_ball.position.y = randi_range(200, win_size.y -200)
 	add_child(spawning_ball)
-
-	
-	pass
 
 func clear_balls():
 #	for ball is_in_group("ball"):
@@ -64,7 +93,6 @@ func spawn_powerup():
 
 
 func _on_power_up_timer_timeout() -> void:
-	
 	clear_powerups()
 	spawn_powerup()
 
@@ -76,34 +104,6 @@ func reinitialize():
 	$PowerUpTimer.start()
 	$BumpCooldownTimer.stop()
 	reset_powerups()
-
-func _on_score_left_body_entered(body: Node2D) -> void:
-	var score_tween = create_tween()
-	
-	print("Opponent Scores...")
-	score[1] += 1
-	
-	#Hud "Pop"
-	$Hud/CPUScore.text = str(score[1])
-	score_tween.tween_property($Hud/CPUScore, "scale", Vector2(1.5, 1.5), 0.1).set_trans(Tween.TRANS_ELASTIC)
-	score_tween.tween_property($Hud/CPUScore, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_ELASTIC)
-	
-	print("Opponent Points: ", score[1])
-	reinitialize()
-
-func _on_score_right_body_entered(body: Node2D) -> void:
-	var score_tween = create_tween()
-	
-	print("Player Scores...")
-	score[0] += 1
-	
-	#Hud "Pop"
-	$Hud/PlayerScore.text = str(score[0])
-	score_tween.tween_property($Hud/PlayerScore, "scale", Vector2(1.5, 1.5), 0.1).set_trans(Tween.TRANS_ELASTIC)
-	score_tween.tween_property($Hud/PlayerScore, "scale", Vector2(1, 1), 0.1).set_trans(Tween.TRANS_ELASTIC)
-	
-	print("Player Points: ", score[0])
-	reinitialize()
 
 func _process(delta: float) -> void:
 	if $BumpCooldownTimer.time_left > 0:
