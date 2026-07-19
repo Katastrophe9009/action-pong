@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+signal ability_cooldown(time_left)
+
 #Scriptwide Vars
 var win_height : int
 var p_height : int
@@ -11,6 +13,8 @@ func _ready() -> void:
 	win_height = get_viewport_rect().size.y
 	p_height = $ColorRect.get_size().y
 	default_scale = scale
+	
+	
 
 #Custom Functions
 func shrink_to_normal_scale_fast():
@@ -18,10 +22,12 @@ func shrink_to_normal_scale_fast():
 		scale = scale * .9
 
 func bump():
-	if $"../BumpCooldownTimer".is_stopped():
+	if $BumpCooldownTimer.is_stopped():
 		print("Bump!")
-		$"../BumpCooldownTimer".start()
+		$BumpCooldownTimer.start()
 		scale = scale * 2
+		
+	
 	
 func cursor_positioning():
 	position.y = get_global_mouse_position().y
@@ -42,3 +48,9 @@ func _process(delta: float) -> void:
 	
 	#Mouse/touch controls
 	cursor_positioning()
+	
+	if $BumpCooldownTimer.time_left > 0:
+		ability_cooldown.emit(str(roundi($BumpCooldownTimer.time_left)))
+	else:
+		ability_cooldown.emit(str(""))
+		

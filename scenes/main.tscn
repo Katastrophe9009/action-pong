@@ -37,10 +37,6 @@ autostart = true
 [node name="PowerUpDurationTimer" type="Timer" parent="." unique_id=1301796267]
 wait_time = 10.0
 
-[node name="BumpCooldownTimer" type="Timer" parent="." unique_id=1879984374]
-wait_time = 5.0
-one_shot = true
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1306437074]
 position = Vector2(576, 324)
 

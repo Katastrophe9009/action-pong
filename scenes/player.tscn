@@ -21,3 +21,7 @@ grow_vertical = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1265916193]
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_7dm0k")
+
+[node name="BumpCooldownTimer" type="Timer" parent="." unique_id=2011984]
+wait_time = 5.0
+one_shot = true

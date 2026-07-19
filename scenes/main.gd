@@ -14,6 +14,8 @@ func _ready() -> void:
 	#get window size
 	win_size = get_viewport_rect().size
 	print("Window Size:", win_size)
+	
+	$Player.ability_cooldown.connect(_on_player_ability_cooldown_change)
 
 func _on_screen_shake_timer_timeout() -> void:
 	$Camera2D.offset = Vector2(0,0)
@@ -96,21 +98,24 @@ func _on_power_up_timer_timeout() -> void:
 	clear_powerups()
 	spawn_powerup()
 
+func _on_player_ability_cooldown_change(time_left):
+	
+	$Hud/BumpCooldown.text = time_left
+	
+
 func reinitialize():
 	print("Starting New Round...")
 
 	$BallTimer.start()
 	$PowerUpDurationTimer.stop()
 	$PowerUpTimer.start()
-	$BumpCooldownTimer.stop()
+#	$BumpCooldownTimer.stop()
 	reset_powerups()
 
 func _process(delta: float) -> void:
-	if $BumpCooldownTimer.time_left > 0:
-		$Hud/BumpCooldown.text = str(roundi($BumpCooldownTimer.time_left))
-	else:
-		$Hud/BumpCooldown.text = str("")
-		
+
+	pass
+
 	if $ScreenShakeTimer.time_left > 0:
 		$Camera2D.offset = Vector2(randi_range(-5,5) * ($ScreenShakeTimer.time_left *2),randi_range(-5,5) * ($ScreenShakeTimer.time_left *2))
 		
